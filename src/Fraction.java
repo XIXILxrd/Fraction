@@ -48,6 +48,8 @@ public class Fraction {
         return simplify(newNumerator, newDenominator);
     }
 
+    //asdasas
+
     public Fraction subtraction(Fraction fraction) {
         //TODO
         if (fraction.numerator == 0 || fraction.denominator == 0) {
