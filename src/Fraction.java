@@ -48,10 +48,7 @@ public class Fraction {
         return simplify(newNumerator, newDenominator);
     }
 
-    //asdasas
-
     public Fraction subtraction(Fraction fraction) {
-        //TODO
         if (fraction.numerator == 0 || fraction.denominator == 0) {
             throw new IllegalArgumentException();
         }
@@ -64,7 +61,6 @@ public class Fraction {
     }
 
     public Fraction subtraction(int fractionNumerator, int fractionDenominator) {
-        //TODO
         if (fractionNumerator == 0 || fractionDenominator == 0) {
             throw new IllegalArgumentException();
         }
@@ -109,10 +105,20 @@ public class Fraction {
     }
 
     private Fraction simplify(int numerator, int denominator) {
-        int newNumerator = leastCommonMultiple(denominator, numerator) / Math.max(numerator, denominator);
+        boolean isNegative = numerator < 0;
 
-        if (newNumerator < numerator) {
-            return new Fraction(newNumerator, (denominator / (numerator / newNumerator)));
+        int newNumerator;
+
+        if (isNegative) {
+            newNumerator = leastCommonMultiple(denominator, Math.abs(numerator)) / Math.max(Math.abs(numerator), denominator);
+        }
+        else {
+            newNumerator = leastCommonMultiple(denominator, numerator) / Math.max(numerator, denominator);
+        }
+
+        if (newNumerator < Math.abs(numerator)) {
+            return isNegative ? new Fraction(-newNumerator, (denominator / (Math.abs(numerator) / newNumerator)))
+                    : new Fraction(newNumerator, (denominator / (numerator / newNumerator)));
         }
 
         return new Fraction(numerator, denominator);
